@@ -1,0 +1,1126 @@
+{
+	"info": {
+		"_postman_id": "743d4d04-a577-4701-b96b-64c8cee220a4",
+		"name": "DynamicEye",
+		"description": "Technical Assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25484455"
+	},
+	"item": [
+		{
+			"name": "Healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/healthcheck",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"healthcheck"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Healthy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/healthcheck",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"healthcheck"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 08:46:49 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "41"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"health\": \"Healthy :)\",\n    \"version\": \"1.0.0\"\n}"
+				}
+			]
+		},
+		{
+			"name": "New User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"password\": \"test_pass\",\r\n    \"is_admin\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/user/create_user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"create_user"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Unauthorized Access",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_user\",\r\n    \"password\": \"test_pass\",\r\n    \"is_admin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/create_user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"create_user"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 09:08:36 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "48"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"detail\": \"Unauthorized access: Invalid token.\"\n}"
+				},
+				{
+					"name": "User Found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_user\",\r\n    \"password\": \"test_pass\",\r\n    \"is_admin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/create_user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"create_user"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 09:25:31 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "175"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": false,\n    \"data\": {},\n    \"extras\": {},\n    \"response_code\": 2,\n    \"title\": \"\",\n    \"message\": \"User 'test_user' already exists\",\n    \"developer_message\": \"Conflict: User exists!\",\n    \"total_count\": null\n}"
+				},
+				{
+					"name": "Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_user_postman\",\r\n    \"password\": \"test_pass_postman\",\r\n    \"is_admin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/create_user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"create_user"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 09:25:58 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "336"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"data\": {\n        \"user_access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RfdXNlcl9wb3N0bWFuIiwiaXNfYWRtaW4iOmZhbHNlLCJleHAiOjE3MTM0MzQxNjJ9.njg12UlPyBxIt5HORrQ0xXAHu4F4Q4ZJTrOwdQH-ATM\"\n    },\n    \"extras\": {},\n    \"response_code\": 1,\n    \"title\": \"\",\n    \"message\": \"\",\n    \"developer_message\": \"User inserted successfully.\",\n    \"total_count\": 1\n}"
+				},
+				{
+					"name": "Invalid Token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_user_postman\",\r\n    \"password\": \"test_pass_postman\",\r\n    \"is_admin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/create_user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"create_user"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 10:02:49 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "51"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"detail\": \"Invalid token: admin claim is not True\"\n}"
+				},
+				{
+					"name": "Invalid Password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"password\": \"test_pass\",\r\n    \"is_admin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/create_user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"create_user"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 10:41:18 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "288"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": false,\n    \"data\": {},\n    \"extras\": {},\n    \"response_code\": 2,\n    \"title\": \"\",\n    \"message\": \"Password format is incorrect. It should contain at least 1 symbol, 1 capital letter, 1 number, 1 lowercase letter, and be at least 8 characters long.\",\n    \"developer_message\": \"Invalid Password.\",\n    \"total_count\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Admin User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\",\r\n    \"is_admin\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/user/create_admin_user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"create_admin_user"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin_user_postman\",\r\n    \"password\": \"admin\",\r\n    \"is_admin\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/create_admin_user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"create_admin_user"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 09:20:14 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "337"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"data\": {\n        \"admin_access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluX3VzZXJfcG9zdG1hbiIsImlzX2FkbWluIjp0cnVlLCJleHAiOjE3MTM0MzM4MzB9.YMFyu98cxDOBZBHVmuIu0X7tm2YR5wa4WGNhx64HShI\"\n    },\n    \"extras\": {},\n    \"response_code\": 1,\n    \"title\": \"\",\n    \"message\": \"\",\n    \"developer_message\": \"User inserted successfully.\",\n    \"total_count\": 1\n}"
+				},
+				{
+					"name": "Admin User Exists",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin_user_postman\",\r\n    \"password\": \"admin\",\r\n    \"is_admin\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/create_admin_user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"create_admin_user"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 10:39:10 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "184"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": false,\n    \"data\": {},\n    \"extras\": {},\n    \"response_code\": 2,\n    \"title\": \"\",\n    \"message\": \"User 'admin_user_postman' already exists\",\n    \"developer_message\": \"Conflict: User exists!\",\n    \"total_count\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Generate token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"password\": \"Test_pa33\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin_user_postman\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 12:57:50 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "324"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"data\": {\n        \"user_access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluX3VzZXJfcG9zdG1hbiIsImlzX2FkbWluIjp0cnVlLCJleHAiOjE3MTM0NDY4NzV9.xIQshNqEgoHpLX_gN3dmSaXC-eAnMN5mHsCpyQaiZAo\"\n    },\n    \"extras\": {},\n    \"response_code\": 1,\n    \"title\": \"Create Token\",\n    \"message\": \"\",\n    \"developer_message\": \"\",\n    \"total_count\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "User Info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RfdXNlcm5hbWUiLCJpc19hZG1pbiI6ZmFsc2UsImV4cCI6MTcxMzQ1MTc1NX0.jhR1YTWq9L4gWuYDZqC9i3EixOT_csejdesuXFDxGcw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/user/get_user_info",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"get_user_info"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Invalid Token",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/get_user_info",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"get_user_info"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 14:19:31 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "48"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"detail\": \"Unauthorized access: Invalid token.\"\n}"
+				},
+				{
+					"name": "Successful",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/get_user_info",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"get_user_info"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 14:20:16 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "357"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"data\": {\n        \"username\": \"test_username\",\n        \"is_admin\": false,\n        \"user_access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RfdXNlcm5hbWUiLCJpc19hZG1pbiI6ZmFsc2UsImV4cCI6MTcxMzQ1MTc1NX0.jhR1YTWq9L4gWuYDZqC9i3EixOT_csejdesuXFDxGcw\"\n    },\n    \"extras\": {},\n    \"response_code\": 1,\n    \"title\": \"User info\",\n    \"message\": \"\",\n    \"developer_message\": \"\",\n    \"total_count\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "Edit User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RfdXNlcm5hbWUiLCJpc19hZG1pbiI6ZmFsc2UsImV4cCI6MTcxMzQ1MTc1NX0.jhR1YTWq9L4gWuYDZqC9i3EixOT_csejdesuXFDxGcw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"test_user\",\r\n    \"password\": \"Test_pa333\",\r\n    \"is_admin\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/user/edit_user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"edit_user"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Body error",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"password\": \"Test_pa333\",\r\n    \"is_admin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/edit_user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"edit_user"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 14:28:51 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "194"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": false,\n    \"data\": {},\n    \"extras\": {},\n    \"response_code\": 3,\n    \"title\": \"Edit User\",\n    \"message\": \"An error occurred.\",\n    \"developer_message\": \"'User' object has no attribute 'old_username'\",\n    \"total_count\": null\n}"
+				},
+				{
+					"name": "User Exists",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"password\": \"Test_pa333\",\r\n    \"is_admin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/edit_user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"edit_user"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 14:31:29 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "188"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": false,\n    \"data\": {},\n    \"extras\": {},\n    \"response_code\": 2,\n    \"title\": \"Edit User\",\n    \"message\": \"User 'test_username' already exists\",\n    \"developer_message\": \"Conflict: User exists!\",\n    \"total_count\": null\n}"
+				},
+				{
+					"name": "Successful",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_user\",\r\n    \"password\": \"Test_pa333\",\r\n    \"is_admin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/edit_user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"edit_user"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 14:33:10 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "152"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"data\": {},\n    \"extras\": {},\n    \"response_code\": 1,\n    \"title\": \"Edit User\",\n    \"message\": \"\",\n    \"developer_message\": \"User edited successfully.\",\n    \"total_count\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RfdXNlciIsImlzX2FkbWluIjpmYWxzZSwiZXhwIjoxNzEzNDUyODgyfQ.MO31ZZwNuQQNeGH6iz4e6epSFjP6MVWZDIMfmWAx0m4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/user/delete_user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"delete_user"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/delete_user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"delete_user"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 18 Apr 2024 14:38:34 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "default-src 'self'"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "content-length",
+							"value": "155"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"data\": {},\n    \"extras\": {},\n    \"response_code\": 1,\n    \"title\": \"Delete User\",\n    \"message\": \"\",\n    \"developer_message\": \"User deleted successfully.\",\n    \"total_count\": 1\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "user_access_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluX3VzZXJfcG9zdG1hbiIsImlzX2FkbWluIjp0cnVlLCJleHAiOjE3MTM0MzYxNzh9.vjKT3Ou5LwsyWGOs7-IkMECkz_fwFqBfSs0W2sRHjWk"
+		}
+	]
+}

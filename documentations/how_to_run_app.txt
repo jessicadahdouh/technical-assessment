@@ -1,0 +1,29 @@
+- Make sure you have python3.10 downloaded on your pc
+- Clone the repository from github
+- Create a virtual environment using the following commands:
+	pip install --upgrade pip
+	pip install virtualenv
+	python -m venv venv
+- Activate the venv through:
+ 	python venv\Scripts\activate
+- Install the requirements:
+	pip install -r requirements.txt
+- Run the app through:
+	uvicorn app:app
+- Go to the postman collection and start testing.
+
+- In postman set the FastApi url (http://127.0.0.1:8000) as baseUrl environment variable.
+
+- When testing start as follows:
+	- create an admin user to begin with in order to be able to create a new user and manipulate it
+	- endpoints order is as follows:
+		- healthcheck
+		- /user/create_admin_user (take the access_token and put in it in the authorization headers of the next request)
+		- /user/create_user (make sure the token is of type "Bearer")
+		- /auth/login (to generate token and login)
+		The following can be interchangable:
+		- /user/get_user_info
+		- /user/edit_user
+		- /user/delete_user (you should login again in order to be able to delete your user - inorder for the token to refresh)
+
+** Feel free to contact me incase there are any problems at any step or if further clearance is required.
